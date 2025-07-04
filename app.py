@@ -7,7 +7,7 @@ calorie_model = pickle.load(open('calorie_model.pkl', 'rb'))
 diabetes_model = pickle.load(open('diabetes_model.pkl', 'rb'))
 heart_model = pickle.load(open('heart_model.pkl', 'rb'))
 insurance_model = pickle.load(open('MedicalInsuranceCost.pkl', 'rb'))
-cancer_model = pickle.load(open('breast_cancer.pkl', 'rb'))
+cancer_model = pickle.load(open('Breast_cancer.pkl', 'rb'))
 
 # Streamlit App Configuration
 st.set_page_config(page_title="All-in-One Health Prediction App", layout="wide")
