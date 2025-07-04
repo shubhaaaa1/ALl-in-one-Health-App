@@ -7,7 +7,7 @@ calorie_model = pickle.load(open('calorie_model.pkl', 'rb'))
 diabetes_model = pickle.load(open('diabetes_model.pkl', 'rb'))
 heart_model = pickle.load(open('heart_model.pkl', 'rb'))
 insurance_model = pickle.load(open('MedicalInsuranceCost.pkl', 'rb'))
-cancer_model = pickle.load(open('Breast_cancer.pkl', 'rb'))
+
 
 # Streamlit App Configuration
 st.set_page_config(page_title="All-in-One Health Prediction App", layout="wide")
@@ -22,8 +22,7 @@ app_mode = st.sidebar.radio("Select Prediction",
      'Diabetes Prediction', 
      'Heart Disease Prediction', 
      'BMI Calculator', 
-     'Medical Insurance Cost Prediction', 
-     'Breast Cancer Classification'])
+     'Medical Insurance Cost Prediction'])
 
 # Home Page
 if app_mode == 'Home':
@@ -35,7 +34,6 @@ if app_mode == 'Home':
     - ❤️ Heart Disease Prediction
     - ⚖️ BMI Calculator
     - 💰 Medical Insurance Cost Prediction
-    - 🩺 Breast Cancer Classification
     """)
 
 # Calorie Burn Prediction
@@ -146,23 +144,3 @@ elif app_mode == 'Medical Insurance Cost Prediction':
         input_data = np.array([[age, sex_val, bmi, children, smoker_val, region_val]])
         result = insurance_model.predict(input_data)
         st.success(f'Estimated Insurance Cost: ${result[0]:.2f}')
-
-# Breast Cancer Classification
-elif app_mode == 'Breast Cancer Classification':
-    st.subheader("🩺 Breast Cancer Classification")
-    st.write("Enter the following features:")
-
-    features = []
-    feature_names = ['mean radius', 'mean texture', 'mean perimeter', 'mean area', 'mean smoothness']
-    
-    for feature in feature_names:
-        value = st.number_input(f'{feature}', min_value=0.0)
-        features.append(value)
-
-    if st.button('Predict Breast Cancer'):
-        input_data = np.array([features])
-        result = cancer_model.predict(input_data)
-        if result[0] == 1:
-            st.error('Malignant (High Risk)')
-        else:
-            st.success('Benign (Low Risk)')
